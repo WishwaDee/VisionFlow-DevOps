@@ -19,9 +19,16 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 8000
-        env:                     # CHANGED FROM 'environment'
+        env:
         - name: REDIS_HOST
           value: "redis-service"
+        resources:            
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
 ---
 # 2. THE API SERVICE
 apiVersion: v1
@@ -57,6 +64,13 @@ spec:
       - name: worker
         image: visionflow-worker:latest
         imagePullPolicy: Never
-        env:                     # CHANGED FROM 'environment'
+        env:
         - name: REDIS_HOST
           value: "redis-service"
+        resources:            
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
